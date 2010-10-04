@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("Hype")]
 [assembly: AssemblyProduct("Hype")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("XNA Doodle Jump clone")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2010")]
+[assembly: AssemblyCopyright("Copyright © M.Sokk, M.Lensment, J.Lehtsalu & J.Sakkis")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
