@@ -15,6 +15,14 @@ namespace Hype
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        //TEST
+        Texture2D dummy;
+        Texture2D bg;
+        Vector2 dummyPos = Vector2.Zero;
+        Vector2 dummySpeed = new Vector2(100.0f, 200.0f);
+        float movement = 20f;
+        float elasticity = 1.5f;
+        //END TEST
 
         public Hype()
         {
@@ -23,17 +31,18 @@ namespace Hype
         }
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 600;
+            graphics.IsFullScreen = false;
+            graphics.ApplyChanges();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
+            dummy = Content.Load<Texture2D>("test/dummy");
+            bg = Content.Load<Texture2D>("test/bg");
         }
 
         protected override void UnloadContent()
@@ -43,12 +52,69 @@ namespace Hype
 
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            {
+                dummySpeed.X -= movement;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            {
+                dummySpeed.X += movement;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                dummySpeed.Y -= movement;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                dummySpeed.Y += movement;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftAlt) && Keyboard.GetState().IsKeyDown(Keys.Enter))
+            {
 
-            // TODO: Add your update logic here
-
+                if (graphics.IsFullScreen)
+                {
+                    graphics.IsFullScreen = false;
+                    graphics.PreferredBackBufferWidth = 800;
+                    graphics.PreferredBackBufferHeight = 600;
+                    graphics.ApplyChanges();
+                }
+                else
+                {
+                    graphics.IsFullScreen = true;
+                    graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
+                    graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
+                    graphics.ApplyChanges();
+                }
+            }
+            int MaxX = graphics.PreferredBackBufferWidth - dummy.Width;
+            int MaxY = graphics.PreferredBackBufferHeight - dummy.Height;
+            if (dummyPos.X < 0)
+            {
+                dummySpeed.X *= -1;
+                dummySpeed.X /= elasticity;
+                dummyPos.X = 0;
+            }
+            if (dummyPos.Y < 0)
+            {
+                dummySpeed.Y *= -1;
+                dummySpeed.Y /= elasticity;
+                dummyPos.Y = 0;
+            }
+            if (dummyPos.X > MaxX)
+            {
+                dummySpeed.X *= -1;
+                dummySpeed.X /= elasticity;
+                dummyPos.X = MaxX;
+            }
+            if (dummyPos.Y > MaxY)
+            {
+                dummySpeed.Y *= -1;
+                dummySpeed.Y /= elasticity;
+                dummyPos.Y = MaxY;
+            }
+            dummyPos += dummySpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             base.Update(gameTime);
         }
 
@@ -56,8 +122,10 @@ namespace Hype
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
-
+            spriteBatch.Begin();
+            spriteBatch.Draw(bg, Vector2.Zero, Color.White);
+            spriteBatch.Draw(dummy, dummyPos, Color.White);
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
