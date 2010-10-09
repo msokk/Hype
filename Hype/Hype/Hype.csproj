@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="Game\Enemy.cs" />
     <Compile Include="Game\Entity.cs" />
+    <Compile Include="Game\HypeGame.cs" />
     <Compile Include="Game\IJump.cs" />
     <Compile Include="Game\Level.cs" />
     <Compile Include="Game\Menu.cs" />

@@ -7,5 +7,6 @@ namespace Hype.Game
 {
     interface IJump
     {
+        void Jump();
     }
 }
