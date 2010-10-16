@@ -10,7 +10,7 @@ namespace Hype
         /// </summary>
         static void Main(string[] args)
         {
-            using (Hype game = new Hype())
+            using (HypeGame game = new HypeGame())
             {
                 game.Run();
             }

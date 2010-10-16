@@ -110,18 +110,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\Enemy.cs" />
-    <Compile Include="Game\Entity.cs" />
-    <Compile Include="Game\HypeGame.cs" />
-    <Compile Include="Game\IJump.cs" />
-    <Compile Include="Game\Level.cs" />
-    <Compile Include="Game\Menu.cs" />
-    <Compile Include="Game\Platform.cs" />
-    <Compile Include="Game\Player.cs" />
-    <Compile Include="Game\UI.cs" />
+    <Compile Include="Level.cs" />
+    <Compile Include="Platform.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Hype.cs" />
+    <Compile Include="HypeGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
