@@ -107,7 +107,7 @@ namespace Hype
         {
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
-            spriteBatch.Draw(background, Vector2.Zero, Color.White);
+            spriteBatch.Draw(background, Vector2.Zero, Color.LightYellow);
 
             level.Draw(gameTime, spriteBatch);
 

@@ -8,8 +8,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Hype")]
 [assembly: AssemblyProduct("Hype")]
 [assembly: AssemblyDescription("XNA Doodle Jump clone")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyCopyright("Copyright © M.Sokk, M.Lensment, J.Lehtsalu & J.Sakkis")]
+[assembly: AssemblyCompany("Hype")]
+[assembly: AssemblyCopyright("Copyright © M.Sokk, M.Lensment, J.Lehtsalu, K.Sokk & J.Sakkis")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
