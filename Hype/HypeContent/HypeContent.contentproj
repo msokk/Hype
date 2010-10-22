@@ -42,33 +42,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="test\plate.png">
-      <Name>plate</Name>
+    <Compile Include="Platforms\plate0.png">
+      <Name>plate0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="test\plate1.png">
+    <Compile Include="Platforms\plate1.png">
       <Name>plate1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="test\plate2.png">
+    <Compile Include="Platforms\plate2.png">
       <Name>plate2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="test\plate3.png">
+    <Compile Include="Platforms\plate3.png">
       <Name>plate3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="test\plate4.png">
+    <Compile Include="Platforms\plate4.png">
       <Name>plate4</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="test\plate5.png">
-      <Name>plate5</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

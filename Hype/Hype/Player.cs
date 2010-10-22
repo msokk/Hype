@@ -11,6 +11,7 @@ namespace Hype
     class Player
     {
         private Texture2D texture;
+        private Vector2 location = Vector2.Zero;
         public bool isDead
         {
             get { return dead; }
@@ -30,12 +31,14 @@ namespace Hype
         }
 
         public void Update(GameTime gameTime, KeyboardState keyboardState, GamePadState gamePadState)
-        { 
+        {
+            //TODO: kontrolli kollisiooni + tee füüsikat
+            location.Y += Level.gameSpeed;
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Vector2.Zero, Color.White);
+            spriteBatch.Draw(texture, location, Color.White);
         }
     }
 }

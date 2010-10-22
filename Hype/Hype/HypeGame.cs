@@ -54,7 +54,7 @@ namespace Hype
             endOverlay = Content.Load<Texture2D>("Overlays/end");
             background = Content.Load<Texture2D>("bg");
 
-            level = new Level(Services);
+            level = new Level(Services, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
         }
         /// <summary>
         /// Checks for global input and updates Level.

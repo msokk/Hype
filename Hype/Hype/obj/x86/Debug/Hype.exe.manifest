@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1">
-  <asmv1:assemblyIdentity name="Hype.exe" version="0.1.0.1" publicKeyToken="0000000000000000" language="et-EE" processorArchitecture="x86" type="win32" />
+  <asmv1:assemblyIdentity name="Hype.exe" version="0.1.0.0" publicKeyToken="0000000000000000" language="et-EE" processorArchitecture="x86" type="win32" />
   <description asmv2:iconFile="Game.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -93,14 +93,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Hype.exe" size="54784">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Hype.exe" size="56832">
       <assemblyIdentity name="Hype" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ax7Jn9sXuW8dloeZebuwAJZhY6Y=</dsig:DigestValue>
+        <dsig:DigestValue>ydprvkDIWNR4jFQbePR9A+ghktE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -158,34 +158,16 @@
       <dsig:DigestValue>L3VGraP0mUeNNoBomIuAr/vwn4M=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Content\player.xnb" size="163811">
+  <file name="Content\Platforms\plate0.xnb" size="19367">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>R6KAbzg/P4WsaBiAP3oOFuc5Jfw=</dsig:DigestValue>
+      <dsig:DigestValue>qeNOGm8N4ZaVNv2XQ+Nm4U9dIDk=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Content\test\plate.xnb" size="87127">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>Xh5AfBJ6p8BSaIB+qXuB9Q6TOdA=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Content\test\plate1.xnb" size="16935">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>IJHevgKMlbAh01ZHniCGj/gdP54=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Content\test\plate2.xnb" size="14179">
+  <file name="Content\Platforms\plate1.xnb" size="14179">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -194,7 +176,7 @@
       <dsig:DigestValue>e6QOezaCYHfdwyEJfRIOBkhq3Z4=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Content\test\plate3.xnb" size="5179">
+  <file name="Content\Platforms\plate2.xnb" size="5179">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -203,7 +185,7 @@
       <dsig:DigestValue>Mp5gwilJe2Fem+YKsjDQiYUG8qA=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Content\test\plate4.xnb" size="18491">
+  <file name="Content\Platforms\plate3.xnb" size="18491">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -212,13 +194,22 @@
       <dsig:DigestValue>J289CRjPxIfvD32MsqbUzEWmNqI=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Content\test\plate5.xnb" size="15867">
+  <file name="Content\Platforms\plate4.xnb" size="15867">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>unvcwXvBJ6XijcUj2BpwSsZKBt8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\player.xnb" size="20683">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>WtPlN/1tHrmLXQ1XR/BHwEBN5n4=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Game.ico" size="45126">
