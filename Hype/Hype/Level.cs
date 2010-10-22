@@ -15,6 +15,7 @@ namespace Hype
         public float gameSpeed = 1f;
         private LinkedList<Platform> platforms = new LinkedList<Platform>();
         private float platformYSpacer = 0;
+        private SpriteFont hudFont;
 
         // Level width.      
         public int levelWidth
@@ -50,6 +51,7 @@ namespace Hype
             content = new ContentManager(serviceProvider, "Content");
             width = w;
             height = h;
+            hudFont = Content.Load<SpriteFont>("Fonts/HUD");
             InitPlatforms();
             platforms.AddFirst(new Platform(this, new Vector2(150, 40), 0));
             //TODO: Player tuleb mingi platformi peale luua ära
@@ -72,7 +74,6 @@ namespace Hype
                 LoadPlatforms();
                 DisposePlatforms();
                 Player.Update(gameTime, keyboardState, gamePadState);
-                //TODO: Liiguta tegelast ja platforme + lae uusi platforme sisse
                 
                 gameSpeed += (float)gameTime.ElapsedGameTime.TotalSeconds*0.01f;
             }
@@ -134,7 +135,7 @@ namespace Hype
         /// </summary>
         private void DisposePlatforms()
         {
-            if (platforms.Last.Value.Location.Y > levelHeight+50)
+            if (platforms.Last.Value.Location.Y > levelHeight + 50)
             {
                 platforms.RemoveLast();
             }

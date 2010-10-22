@@ -93,14 +93,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Hype.exe" size="56832">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Hype.exe" size="57344">
       <assemblyIdentity name="Hype" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ydprvkDIWNR4jFQbePR9A+ghktE=</dsig:DigestValue>
+        <dsig:DigestValue>5CD87qgAuacF820AA6LNrjWondM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -120,6 +120,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>IXEXNfPIlcIBBoHTU1aEiWsIgjA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Fonts\HUD.xnb" size="38062">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>cNHOaq1iDkX48hDcs/jvIYLFhAI=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\Fonts\UI.xnb" size="70830">
