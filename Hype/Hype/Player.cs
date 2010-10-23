@@ -19,6 +19,7 @@ namespace Hype
         private const float MaxMoveSpeed = 1750.0f;
         private const float GroundDragFactor = 0.48f;
         private const float AirDragFactor = 0.58f;
+        private const float MaxXSpeed = 3f;
 
 
         public bool isDead
@@ -48,6 +49,18 @@ namespace Hype
         {
             //Apply here gravity and air drag for X axis
             speed.Y += 0.1f;
+            if (speed.X > MaxXSpeed)
+                speed.X = MaxXSpeed;
+            if (speed.X < MaxXSpeed * -1)
+                speed.X = MaxXSpeed * -1;
+            if (speed.X > 0)
+            {
+                speed.X -= 0.1f;
+            }
+            if (speed.X < 0)
+            {
+                speed.X += 0.1f;
+            }
         }
 
         private bool CheckCollision()
@@ -109,10 +122,10 @@ namespace Hype
                 switch (k[i])
                 {
                     case Keys.Right:
-                        speed.X += 1f;
+                            speed.X += 1f;
                         break;
                     case Keys.Left:
-                        speed.X -= 1f;
+                            speed.X -= 1f;
                         break;
                 }
             }
