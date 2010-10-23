@@ -78,6 +78,9 @@ namespace Hype
             if (gamePadState.Buttons.Back == ButtonState.Pressed || keyboardState.IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            if (gamePadState.Buttons.Start == ButtonState.Pressed || keyboardState.IsKeyDown(Keys.Back))
+                level.Restart();
+
             if (level.Player.isDead)
             {
                 level.isGameRunning = false;
@@ -85,8 +88,7 @@ namespace Hype
                 if (anykeyPressed)
                 {
                     ResetElapsedTime();
-                    
-                    level = new Level(Services, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+                    level.Restart();
                 }
             }
             else
@@ -135,7 +137,9 @@ namespace Hype
                 Vector2 overlaySize = new Vector2(endOverlay.Width, endOverlay.Height);
                 Vector2 overlayPosition = center - overlaySize / 2;
                 spriteBatch.Draw(endOverlay, center - overlaySize / 2, Color.White);
+                Vector2 scoreSize = bigUIFont.MeasureString(level.gameScore.ToString());
                 spriteBatch.DrawString(uiFont, "Your score is", overlayPosition + new Vector2(15, 10), Color.Red, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(bigUIFont, level.gameScore.ToString(), center - scoreSize / 2, Color.White);
                 spriteBatch.DrawString(uiFont, "Press Space (A)! ", overlayPosition + new Vector2(15, 340), Color.Red, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             }
 
@@ -146,7 +150,7 @@ namespace Hype
                 spriteBatch.Draw(startOverlay, overlayPosition, Color.White);
 
                 String timeLeft = (startDelay - gameTime.TotalGameTime.Seconds).ToString();
-                spriteBatch.DrawString(bigUIFont, timeLeft, center - new Vector2(30, 45), Color.White);
+                spriteBatch.DrawString(bigUIFont, timeLeft, center -  bigUIFont.MeasureString(timeLeft) / 2, Color.White);
                 spriteBatch.DrawString(uiFont, "Game starts in:", overlayPosition + new Vector2(15, 10), Color.Red, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                 spriteBatch.DrawString(uiFont, "Get ready!", overlayPosition + new Vector2(70, 180), Color.Red, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             }

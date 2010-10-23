@@ -17,6 +17,15 @@ namespace Hype
         private float platformYSpacer = 0;
         private SpriteFont hudFont;
 
+        private TimeSpan scoreTime;
+
+        // Level width.      
+        public double gameScore
+        {
+            get { return gamescore; }
+        }
+        private double gamescore;
+
         // Level width.      
         public int levelWidth
         {
@@ -38,6 +47,11 @@ namespace Hype
         }
         Player player;
 
+        // Platforms on level     
+        public LinkedList<Platform> Platforms
+        {
+            get { return platforms; }
+        }
 
         // Level content.        
         public ContentManager Content
@@ -49,14 +63,13 @@ namespace Hype
         public Level(IServiceProvider serviceProvider, int w, int h)
         {
             content = new ContentManager(serviceProvider, "Content");
+            scoreTime = new TimeSpan();
             width = w;
             height = h;
             hudFont = Content.Load<SpriteFont>("Fonts/HUD");
             InitPlatforms();
-            platforms.AddFirst(new Platform(this, new Vector2(150, 40), 0));
-            //TODO: Player tuleb mingi platformi peale luua ära
-
-            player = new Player(this); //AJUTINE
+            platforms.AddFirst(new Platform(this, new Vector2(levelWidth - 200, levelHeight - 70), 0));
+            player = new Player(this, new Vector2(levelWidth - 160, levelHeight - 143));
         }
 
         /// <summary>
@@ -76,6 +89,7 @@ namespace Hype
                 Player.Update(gameTime, keyboardState, gamePadState);
                 
                 gameSpeed += (float)gameTime.ElapsedGameTime.TotalSeconds*0.01f;
+                scoreTime += gameTime.ElapsedGameTime;
             }
         }
 
@@ -84,11 +98,11 @@ namespace Hype
         /// </summary>
         private void InitPlatforms()
         {
-            float heightToFill = (int)levelHeight;
+            float heightToFill = (int)levelHeight - 100;
             Random r = new Random();
             while (heightToFill > 0)
             {
-                platformYSpacer = (float)r.Next(40, 70);
+                platformYSpacer = (float)r.Next(60, 100);
                 heightToFill -= platformYSpacer;
 
                 int platformCount = r.Next(1, 3);
@@ -147,12 +161,16 @@ namespace Hype
         /// </summary>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-
             foreach (Platform p in platforms)
             {
                 p.Draw(gameTime, spriteBatch);
             }
             Player.Draw(gameTime, spriteBatch);
+            if (isGameRunning)
+            {
+                    gamescore = Math.Floor(Math.Pow(scoreTime.TotalSeconds, (double)gameSpeed));
+                    spriteBatch.DrawString(hudFont, "Skoor: " + gameScore, Vector2.Zero, Color.Red);
+            }
         }
 
 
@@ -172,7 +190,10 @@ namespace Hype
             gameSpeed = 1f;
             platforms.Clear();
             InitPlatforms();
-            player = new Player(this);
+            platforms.AddFirst(new Platform(this, new Vector2(levelWidth - 200, levelHeight - 70), 0));
+            player = new Player(this, new Vector2(levelWidth - 160, levelHeight - 143));
+            gamescore = 0;
+            scoreTime = new TimeSpan();
             isGameRunning = true;
         }
     }

@@ -11,8 +11,16 @@ namespace Hype
     class Player
     {
         private Texture2D texture;
-        private Vector2 location = Vector2.Zero;
+        private Vector2 location;
         private Vector2 speed = Vector2.Zero;
+        private SpriteEffects flip = SpriteEffects.None;
+
+        private const float MoveAcceleration = 13000.0f;
+        private const float MaxMoveSpeed = 1750.0f;
+        private const float GroundDragFactor = 0.48f;
+        private const float AirDragFactor = 0.58f;
+
+
         public bool isDead
         {
             get { return dead; }
@@ -25,20 +33,45 @@ namespace Hype
         }
         Level level;
 
-        public Player(Level level)
+        public Player(Level level, Vector2 location)
         {
             this.level = level;
+            this.location = location;
             texture = Level.Content.Load<Texture2D>("player");
+        }
+        public Player(Level level)
+            : this(level, Vector2.Zero)
+        {
         }
 
         private void ApplyPhysics()
         {
-
+            //Apply here gravity and air drag for X axis
+            speed.Y += 0.1f;
         }
 
-        private void CheckCollision()
+        private bool CheckCollision()
         {
+            if (speed.Y > 0 || location.Y < 0)
+            {
+                Rectangle playerBounds = new Rectangle((int)location.X, (int)location.Y, texture.Width, texture.Height);
+                foreach (Platform p in Level.Platforms)
+                {
+                    Rectangle platformBounds = new Rectangle((int)p.Location.X, (int)p.Location.Y, p.Size.Width, p.Size.Height);
+                    if (playerBounds.Bottom >= platformBounds.Top + 8f && playerBounds.Bottom < platformBounds.Top + 12f &&
+                        playerBounds.Right > platformBounds.Left && playerBounds.Left < platformBounds.Right)
+                    {
+                        speed.Y = 0f;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
 
+        private void DoJump()
+        {
+            speed.Y = -5f * level.gameSpeed;
         }
 
         private void SideReEntry()
@@ -63,8 +96,11 @@ namespace Hype
         public void Update(GameTime gameTime, KeyboardState keyboardState, GamePadState gamePadState)
         {
             ApplyPhysics();
-            CheckCollision();
-
+            bool hasCollision = CheckCollision();
+            if (hasCollision)
+            {
+                DoJump();
+            }
             //TODO: Move the player
 
             Keys[] k = keyboardState.GetPressedKeys();
@@ -78,13 +114,6 @@ namespace Hype
                     case Keys.Left:
                         speed.X -= 1f;
                         break;
-                    case Keys.Up:
-                        speed.Y -= 1f;
-                        break;
-                    case Keys.Down:
-                        speed.Y += 1f;
-                        break;
-
                 }
             }
             location.Y += Level.gameSpeed;
@@ -95,7 +124,15 @@ namespace Hype
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, location, Color.White);
+            if (speed.X > 0)
+            {
+                flip = SpriteEffects.None;
+            }
+            else if (speed.X < 0)
+            {
+                flip = SpriteEffects.FlipHorizontally;
+            }
+            spriteBatch.Draw(texture, location, null, Color.White, 0f, Vector2.Zero, 1f, flip, 0f);
         }
     }
 }
