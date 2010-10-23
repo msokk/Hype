@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Hype
 {
@@ -21,6 +22,9 @@ namespace Hype
         private const float AirDragFactor = 0.58f;
         private const float MaxXSpeed = 3f;
 
+        //Sound effect test
+        private SoundEffect dieSound;
+        private SoundEffect jumpSound;
 
         public bool isDead
         {
@@ -39,6 +43,8 @@ namespace Hype
             this.level = level;
             this.location = location;
             texture = Level.Content.Load<Texture2D>("player");
+            dieSound = Level.Content.Load<SoundEffect>("Sounds/playerDeath");
+            jumpSound = Level.Content.Load<SoundEffect>("Sounds/jump");
         }
         public Player(Level level)
             : this(level, Vector2.Zero)
@@ -68,8 +74,8 @@ namespace Hype
                 foreach (Platform p in Level.Platforms)
                 {
                     Rectangle platformBounds = new Rectangle((int)p.Location.X, (int)p.Location.Y, p.Size.Width, p.Size.Height);
-                    if (playerBounds.Bottom >= platformBounds.Top + 8f && playerBounds.Bottom < platformBounds.Top + 12f &&
-                        playerBounds.Right > platformBounds.Left && playerBounds.Left < platformBounds.Right)
+                    if (playerBounds.Bottom >= platformBounds.Top + 8f && //playerBounds.Bottom < platformBounds.Top + 12f &&
+                        playerBounds.Right - playerBounds.Width / 2 > platformBounds.Left && playerBounds.Left + playerBounds.Width / 2 < platformBounds.Right)
                     {
                         //speed.Y = 0f;
                         return true;
@@ -81,6 +87,7 @@ namespace Hype
 
         private void DoJump()
         {
+            jumpSound.Play();
             speed.Y = -5f * level.gameSpeed;
         }
 
@@ -100,17 +107,18 @@ namespace Hype
         {
             if (this.location.Y > Level.levelHeight + 50)
             {
+                dieSound.Play();
                 dead = true;
             }
         }
         public void Update(GameTime gameTime, KeyboardState keyboardState, GamePadState gamePadState)
         {
-            ApplyPhysics();
             bool hasCollision = CheckCollision();
             if (hasCollision)
             {
                 DoJump();
             }
+            ApplyPhysics();
             //TODO: Move the player
 
             Keys[] k = keyboardState.GetPressedKeys();

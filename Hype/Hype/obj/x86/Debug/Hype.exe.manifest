@@ -100,7 +100,11 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<<<<<<< .mine
+        <dsig:DigestValue>R3j54l1E6Y9BvOusA5krZbifA0g=</dsig:DigestValue>
+=======
         <dsig:DigestValue>nz+dzwfLgx+w7BKOZb46uLLhp78=</dsig:DigestValue>
+>>>>>>> .r20
       </hash>
     </dependentAssembly>
   </dependency>
@@ -219,6 +223,24 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>WtPlN/1tHrmLXQ1XR/BHwEBN5n4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Sounds\jump.xnb" size="133737">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>6ijtiJ26fwpPdtaAOfzSIUI0mqQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Sounds\playerDeath.xnb" size="308649">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>Mnb/ncz+O6sqVXZqwgngF0Y7rpY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Game.ico" size="45126">
