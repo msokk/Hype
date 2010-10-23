@@ -99,7 +99,8 @@ namespace Hype
                     int platformType = r.Next(0, 4);
                     Platform p = new Platform(this, Vector2.Zero, platformType);
                     float platFormX = (float)r.Next(i * sectorWidth, i * sectorWidth + sectorWidth - p.Size.Width);
-                    Vector2 platformLocation = new Vector2(platFormX, heightToFill + MathHelper.Clamp((float)r.Next(0, (int)platformYSpacer), 0, p.Size.Height));
+                    Vector2 platformLocation = new Vector2(platFormX, heightToFill + 
+                        MathHelper.Clamp((float)r.Next(0, (int)platformYSpacer), 0, (int)platformYSpacer - p.Size.Height));
                     p = new Platform(this, platformLocation, platformType);
                     platforms.AddFirst(p);
                 }
@@ -168,8 +169,11 @@ namespace Hype
         /// </summary>
         public void Restart()
         {
-            //TODO:: Kõik asukohad nulli, populeerida platformid, mängija ellu
-
+            gameSpeed = 1f;
+            platforms.Clear();
+            InitPlatforms();
+            player = new Player(this);
+            isGameRunning = true;
         }
     }
 }

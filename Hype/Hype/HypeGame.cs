@@ -80,12 +80,13 @@ namespace Hype
 
             if (level.Player.isDead)
             {
-                bool anykeyPressed = keyboardState.GetPressedKeys().Length > 0 || gamePadState.IsButtonDown(Buttons.A);
+                level.isGameRunning = false;
+                bool anykeyPressed = keyboardState.IsKeyDown(Keys.Space) || gamePadState.IsButtonDown(Buttons.A);
                 if (anykeyPressed)
                 {
                     ResetElapsedTime();
-                    level.isGameRunning = false;
-                    level.Restart();
+                    
+                    level = new Level(Services, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
                 }
             }
             else
@@ -134,7 +135,8 @@ namespace Hype
                 Vector2 overlaySize = new Vector2(endOverlay.Width, endOverlay.Height);
                 Vector2 overlayPosition = center - overlaySize / 2;
                 spriteBatch.Draw(endOverlay, center - overlaySize / 2, Color.White);
-                spriteBatch.DrawString(uiFont, "Your score", overlayPosition + new Vector2(15, 10), Color.Red, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(uiFont, "Your score is", overlayPosition + new Vector2(15, 10), Color.Red, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(uiFont, "Press Space (A)! ", overlayPosition + new Vector2(15, 340), Color.Red, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             }
 
             if (!level.isGameRunning && !level.Player.isDead)
