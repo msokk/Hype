@@ -93,14 +93,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Hype.exe" size="59904">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Hype.exe" size="59392">
       <assemblyIdentity name="Hype" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>PG+cdpK9CLu3z/21M2YeqXpPYSA=</dsig:DigestValue>
+        <dsig:DigestValue>nz+dzwfLgx+w7BKOZb46uLLhp78=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -49,15 +49,12 @@ namespace Hype
         {
             //Apply here gravity and air drag for X axis
             speed.Y += 0.1f;
-            if (speed.X > MaxXSpeed)
-                speed.X = MaxXSpeed;
-            if (speed.X < MaxXSpeed * -1)
-                speed.X = MaxXSpeed * -1;
-            if (speed.X > 0)
+            speed.X = MathHelper.Clamp(speed.X, MaxXSpeed * -1, MaxXSpeed);
+            if (speed.X > 0.1f)
             {
                 speed.X -= 0.1f;
             }
-            if (speed.X < 0)
+            if (speed.X < -0.1f)
             {
                 speed.X += 0.1f;
             }
@@ -65,7 +62,7 @@ namespace Hype
 
         private bool CheckCollision()
         {
-            if (speed.Y > 0 || location.Y < 0)
+            if (speed.Y > 0 && location.Y + texture.Height > 0)
             {
                 Rectangle playerBounds = new Rectangle((int)location.X, (int)location.Y, texture.Width, texture.Height);
                 foreach (Platform p in Level.Platforms)
@@ -74,7 +71,7 @@ namespace Hype
                     if (playerBounds.Bottom >= platformBounds.Top + 8f && playerBounds.Bottom < platformBounds.Top + 12f &&
                         playerBounds.Right > platformBounds.Left && playerBounds.Left < platformBounds.Right)
                     {
-                        speed.Y = 0f;
+                        //speed.Y = 0f;
                         return true;
                     }
                 }
