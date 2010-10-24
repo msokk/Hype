@@ -104,7 +104,7 @@ namespace Hype
 
             Vector2 overlayLeftSize = new Vector2(overlayLeft.Width, overlayLeft.Height);
             spriteBatch.Draw(overlayLeft, center - overlayLeftSize / 2 - new Vector2(120, 0), Color.White);
-            spriteBatch.DrawString(uiFont, "Choose your character:", overlayPosition + new Vector2(15, 10), Color.MediumSeaGreen, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(uiFont, "Choose your character:", overlayPosition + new Vector2(-60, -50), Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 
 
             playerTexture = content.Load<Texture2D>("Player/" + getPlayerIndex());

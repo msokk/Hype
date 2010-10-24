@@ -107,8 +107,9 @@
     <Reference Include="mscorlib">
       <Private>False</Private>
     </Reference>
-    <Reference Include="Nuclex.Input">
-      <HintPath>..\..\..\..\..\..\Desktop\Nuclex.Input.dll</HintPath>
+    <Reference Include="Nuclex.Input, Version=4.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Nuclex.Input.dll</HintPath>
     </Reference>
     <Reference Include="SlimDX.DirectInput">
       <HintPath>..\..\..\..\..\..\Desktop\SlimDX.DirectInput.dll</HintPath>
