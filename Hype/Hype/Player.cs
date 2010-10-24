@@ -38,16 +38,20 @@ namespace Hype
         }
         Level level;
 
-        public Player(Level level, Vector2 location)
+        public Player(Level level, Vector2 location, String playerIndex)
         {
             this.level = level;
             this.location = location;
-            texture = Level.Content.Load<Texture2D>("player");
+            texture = Level.Content.Load<Texture2D>("Player/" + playerIndex);
             dieSound = Level.Content.Load<SoundEffect>("Sounds/playerDeath");
             jumpSound = Level.Content.Load<SoundEffect>("Sounds/jump");
         }
+        public Player(Level level, String playerIndex)
+            : this(level, new Vector2(level.levelWidth - 160, level.levelHeight - 143), playerIndex)
+        {
+        }
         public Player(Level level)
-            : this(level, Vector2.Zero)
+            : this(level, new Vector2(level.levelWidth - 160, level.levelHeight - 143), "1.1")
         {
         }
 
@@ -87,10 +91,13 @@ namespace Hype
 
         private void DoJump()
         {
-            jumpSound.Play();
+            jumpSound.Play(0.5f, 0f, 0f);
             speed.Y = -5f * level.gameSpeed;
         }
 
+        /// <summary>
+        /// Player can cross sides
+        /// </summary>
         private void SideReEntry()
         {
             if (this.location.X > Level.levelWidth)
@@ -103,15 +110,25 @@ namespace Hype
             }
         }
 
+        /// <summary>
+        /// Player is dead when he is over the bottom more than 50px
+        /// </summary>
         private void CheckDeath()
         {
             if (this.location.Y > Level.levelHeight + 50)
             {
-                dieSound.Play();
+                dieSound.Play(0.5f, 0f, 0f);
                 dead = true;
             }
         }
-        public void Update(GameTime gameTime, KeyboardState keyboardState, GamePadState gamePadState)
+
+        public void ResetPosition()
+        {
+            this.location = new Vector2(Level.levelWidth - 160, Level.levelHeight - 143);
+            this.dead = false;
+        }
+
+        public void Update(GameTime gameTime, KeyboardState keyboardState, GamePadState gamePadState, GamePadState genericPadState)
         {
             bool hasCollision = CheckCollision();
             if (hasCollision)
@@ -119,21 +136,19 @@ namespace Hype
                 DoJump();
             }
             ApplyPhysics();
-            //TODO: Move the player
 
-            Keys[] k = keyboardState.GetPressedKeys();
-            for (int i = 0; i < k.Length; i++)
+            if (keyboardState.IsKeyDown(Keys.Right) || Math.Round(gamePadState.ThumbSticks.Left.X, 1) > 0 ||
+                Math.Round(genericPadState.ThumbSticks.Left.X, 1) > 0)
             {
-                switch (k[i])
-                {
-                    case Keys.Right:
-                            speed.X += 1f;
-                        break;
-                    case Keys.Left:
-                            speed.X -= 1f;
-                        break;
-                }
+                speed.X += 1f;
             }
+            if (keyboardState.IsKeyDown(Keys.Left) || Math.Round(gamePadState.ThumbSticks.Left.X, 1) < 0 ||
+                Math.Round(genericPadState.ThumbSticks.Left.X, 1) < 0)
+            {
+                speed.X -= 1f;
+            }
+
+
             location.Y += Level.gameSpeed;
             location += speed;
             SideReEntry();

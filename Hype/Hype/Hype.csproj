@@ -107,6 +107,12 @@
     <Reference Include="mscorlib">
       <Private>False</Private>
     </Reference>
+    <Reference Include="Nuclex.Input">
+      <HintPath>..\..\..\..\..\..\Desktop\Nuclex.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="SlimDX.DirectInput">
+      <HintPath>..\..\..\..\..\..\Desktop\SlimDX.DirectInput.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
@@ -124,6 +130,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharacterSelect.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Player.cs" />

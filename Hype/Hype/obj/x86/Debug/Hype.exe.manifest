@@ -93,18 +93,38 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Hype.exe" size="59392">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Hype.exe" size="60416">
       <assemblyIdentity name="Hype" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-<<<<<<< .mine
-        <dsig:DigestValue>R3j54l1E6Y9BvOusA5krZbifA0g=</dsig:DigestValue>
-=======
-        <dsig:DigestValue>nz+dzwfLgx+w7BKOZb46uLLhp78=</dsig:DigestValue>
->>>>>>> .r20
+        <dsig:DigestValue>9YYGmvgndfTp7fpyGsIV7Xg2Lpo=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Nuclex.Input.dll" size="75776">
+      <assemblyIdentity name="Nuclex.Input" version="4.0.0.0" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>WnJnQr1jQA13P2dNE9DbpYc2w3w=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SlimDX.DirectInput.dll" size="889856">
+      <assemblyIdentity name="SlimDX.DirectInput" version="4.0.10.43" publicKeyToken="96BB577564343F16" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>rpl0yTEE8qMAtaQVs23d4hnd9Ck=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

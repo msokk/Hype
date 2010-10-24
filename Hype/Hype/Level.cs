@@ -69,14 +69,18 @@ namespace Hype
             hudFont = Content.Load<SpriteFont>("Fonts/HUD");
             InitPlatforms();
             platforms.AddFirst(new Platform(this, new Vector2(levelWidth - 200, levelHeight - 70), 0));
-            player = new Player(this, new Vector2(levelWidth - 160, levelHeight - 143));
+        }
+
+        public void Start(String playerIndex)
+        {
+            player = new Player(this, playerIndex);
         }
 
         /// <summary>
         /// Updates all objects in the world, performs collision between them,
         /// and handles the time limit with scoring.
         /// </summary>
-        public void Update(GameTime gameTime, KeyboardState keyboardState, GamePadState gamePadState)
+        public void Update(GameTime gameTime, KeyboardState keyboardState, GamePadState gamePadState, GamePadState genericPadState)
         {
             if (isGameRunning)
             {
@@ -86,7 +90,7 @@ namespace Hype
                 }
                 LoadPlatforms();
                 DisposePlatforms();
-                Player.Update(gameTime, keyboardState, gamePadState);
+                Player.Update(gameTime, keyboardState, gamePadState, genericPadState);
                 
                 gameSpeed += (float)gameTime.ElapsedGameTime.TotalSeconds*0.01f;
                 scoreTime += gameTime.ElapsedGameTime;
@@ -165,11 +169,16 @@ namespace Hype
             {
                 p.Draw(gameTime, spriteBatch);
             }
-            Player.Draw(gameTime, spriteBatch);
+
+            if(Player != null) {
+                Player.Draw(gameTime, spriteBatch);
+            }
+
             if (isGameRunning)
             {
                     gamescore = Math.Floor(Math.Pow(scoreTime.TotalSeconds, (double)gameSpeed));
-                    spriteBatch.DrawString(hudFont, "Skoor: " + gameScore, Vector2.Zero, Color.Red);
+                    spriteBatch.DrawString(hudFont, "Time: " + (int)scoreTime.TotalSeconds, Vector2.Zero, Color.Gold);
+                    spriteBatch.DrawString(hudFont, "Score: " + gameScore, new Vector2(0, hudFont.LineSpacing), Color.Red);
             }
         }
 
@@ -191,7 +200,7 @@ namespace Hype
             platforms.Clear();
             InitPlatforms();
             platforms.AddFirst(new Platform(this, new Vector2(levelWidth - 200, levelHeight - 70), 0));
-            player = new Player(this, new Vector2(levelWidth - 160, levelHeight - 143));
+            player.ResetPosition();
             gamescore = 0;
             scoreTime = new TimeSpan();
             isGameRunning = true;
