@@ -78,7 +78,7 @@ namespace Hype
                 foreach (Platform p in Level.Platforms)
                 {
                     Rectangle platformBounds = new Rectangle((int)p.Location.X, (int)p.Location.Y, p.Size.Width, p.Size.Height);
-                    if (playerBounds.Bottom >= platformBounds.Top + 8f && //playerBounds.Bottom < platformBounds.Top + 12f &&
+                    if (playerBounds.Bottom >= platformBounds.Top + 8f && playerBounds.Bottom < platformBounds.Top + 15f &&
                         playerBounds.Right - playerBounds.Width / 2 > platformBounds.Left && playerBounds.Left + playerBounds.Width / 2 < platformBounds.Right)
                     {
                         //speed.Y = 0f;
@@ -130,6 +130,7 @@ namespace Hype
 
         public void Update(GameTime gameTime, KeyboardState keyboardState, GamePadState gamePadState, GamePadState genericPadState)
         {
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             bool hasCollision = CheckCollision();
             if (hasCollision)
             {
@@ -140,12 +141,12 @@ namespace Hype
             if (keyboardState.IsKeyDown(Keys.Right) || Math.Round(gamePadState.ThumbSticks.Left.X, 1) > 0 ||
                 Math.Round(genericPadState.ThumbSticks.Left.X, 1) > 0)
             {
-                speed.X += 1f;
+                speed.X += 1f + 1 * elapsed;
             }
             if (keyboardState.IsKeyDown(Keys.Left) || Math.Round(gamePadState.ThumbSticks.Left.X, 1) < 0 ||
                 Math.Round(genericPadState.ThumbSticks.Left.X, 1) < 0)
             {
-                speed.X -= 1f;
+                speed.X -= 1f + 1 * elapsed;
             }
 
 

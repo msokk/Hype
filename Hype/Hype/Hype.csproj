@@ -112,7 +112,7 @@
       <HintPath>.\Nuclex.Input.dll</HintPath>
     </Reference>
     <Reference Include="SlimDX.DirectInput">
-      <HintPath>..\..\..\..\..\..\Desktop\SlimDX.DirectInput.dll</HintPath>
+      <HintPath>.\SlimDX.DirectInput.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>False</Private>
