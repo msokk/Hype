@@ -131,7 +131,7 @@ namespace Hype
                 //Player isn't dead, game starts if initial 5 seconds is over
                 else
                 {
-                    if (startDelay+1 <= 1)
+                    if (startDelay + 1 <= 2)
                     {
                         level.isGameRunning = true;
                     }
@@ -186,9 +186,10 @@ namespace Hype
                 Vector2 overlayPosition = center - overlaySize / 2;
                 spriteBatch.Draw(endOverlay, overlayPosition, Color.White);
                 Vector2 scoreSize = bigUIFont.MeasureString(level.gameScore.ToString());
-                spriteBatch.DrawString(uiFont, "Your score is", overlayPosition + new Vector2(15, 10), Color.Red, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-                spriteBatch.DrawString(bigUIFont, level.gameScore.ToString(), center - scoreSize / 2, Color.White);
-                spriteBatch.DrawString(uiFont, "Press Space(A)! ", overlayPosition + new Vector2(15, 340), Color.Red, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                float scoreScale = (level.gameScore < 100000) ? 1f : 0.7f;
+                spriteBatch.DrawString(uiFont, "Your score is", center - uiFont.MeasureString("Your score is") / 2 - new Vector2(0, 180), Color.Black, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(bigUIFont, level.gameScore.ToString(), center - scoreSize / 2, Color.White, 0f, Vector2.Zero, scoreScale, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(uiFont, "Press Space(A)! ", overlayPosition + new Vector2(15, 340), Color.Black, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             }
 
             if (!level.isGameRunning && !level.Player.isDead)
@@ -199,8 +200,8 @@ namespace Hype
 
                 String timeLeft = Math.Floor(startDelay).ToString();
                 spriteBatch.DrawString(bigUIFont, timeLeft, center - bigUIFont.MeasureString(timeLeft) / 2, Color.White);
-                spriteBatch.DrawString(uiFont, "Game starts in:", overlayPosition + new Vector2(15, 10), Color.Red, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-                spriteBatch.DrawString(uiFont, "Get ready!", overlayPosition + new Vector2(70, 180), Color.Red, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(uiFont, "Game starts in:", overlayPosition + new Vector2(15, 10), Color.Black, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(uiFont, "Get ready!", overlayPosition + new Vector2(70, 180), Color.Black, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             }
 
         }

@@ -122,10 +122,12 @@ namespace Hype
             Vector2 center = new Vector2(screenArea.X + screenArea.Width / 2.0f,
                              screenArea.Y + screenArea.Height / 2.0f);
 
+            //Overlay
             Vector2 overlaySize = new Vector2(overlayTexture.Width, overlayTexture.Height);
             Vector2 overlayPosition = center - overlaySize / 2;
             spriteBatch.Draw(overlayTexture, center - overlaySize / 2, Color.White);
 
+            //Arrows
             Vector2 overlayUpSize = new Vector2(overlayUp.Width, overlayUp.Height);
             spriteBatch.Draw(overlayUp, center - overlayUpSize / 2 - new Vector2(0, 130), Color.White);
 
@@ -137,9 +139,18 @@ namespace Hype
 
             Vector2 overlayLeftSize = new Vector2(overlayLeft.Width, overlayLeft.Height);
             spriteBatch.Draw(overlayLeft, center - overlayLeftSize / 2 - new Vector2(120, 0), Color.White);
-            spriteBatch.DrawString(uiFont, "Choose your character:", overlayPosition + new Vector2(-60, -50), Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(uiFont, "Choose your character", overlayPosition + new Vector2(-60, -50), Color.Black, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 
+            //Help
+            float helpScale = 0.6f;
+            Vector2 typeSize = uiFont.MeasureString("type") * helpScale;
+            Vector2 colorSize = uiFont.MeasureString("color") * helpScale;
+            spriteBatch.DrawString(uiFont, "type", center - typeSize / 2 - new Vector2(50, 15), Color.Black, 1.57f, Vector2.Zero, helpScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(uiFont, "color", center - colorSize / 2 - new Vector2(0, 100), Color.Black, 0f, Vector2.Zero, helpScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(uiFont, "type", center - typeSize / 2 + new Vector2(120, -15), Color.Black, 1.57f, Vector2.Zero, helpScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(uiFont, "color", center - colorSize / 2 + new Vector2(0, 100), Color.Black, 0f, Vector2.Zero, helpScale, SpriteEffects.None, 0f);
 
+            //Player image
             playerTexture = content.Load<Texture2D>("Player/" + getPlayerIndex());
             Vector2 playerLocation = new Vector2(center.X - (float)Math.Floor((double)playerTexture.Width / 2)
                 , center.Y - (float)Math.Floor((double)playerTexture.Height / 2));

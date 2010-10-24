@@ -88,9 +88,9 @@ namespace Hype
                 {
                     p.Update(gameTime);
                 }
+                Player.Update(gameTime, keyboardState, gamePadState, genericPadState);
                 LoadPlatforms();
                 DisposePlatforms();
-                Player.Update(gameTime, keyboardState, gamePadState, genericPadState);
                 
                 gameSpeed += (float)gameTime.ElapsedGameTime.TotalSeconds*0.05f;
                 scoreTime += gameTime.ElapsedGameTime;
@@ -178,8 +178,8 @@ namespace Hype
             if (isGameRunning)
             {
                     gamescore = Math.Floor(Math.Pow(scoreTime.TotalSeconds, (double)gameSpeed));
-                    spriteBatch.DrawString(hudFont, "Time: " + (int)scoreTime.TotalSeconds, Vector2.Zero, Color.Gold);
-                    spriteBatch.DrawString(hudFont, "Score: " + gameScore, new Vector2(0, hudFont.LineSpacing), Color.Red);
+                    spriteBatch.DrawString(hudFont, "Time: " + (int)scoreTime.TotalSeconds, Vector2.Zero, Color.Black);
+                    spriteBatch.DrawString(hudFont, "Score: " + gameScore, new Vector2(0, hudFont.LineSpacing), Color.Black);
             }
         }
 

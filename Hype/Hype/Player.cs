@@ -12,7 +12,7 @@ namespace Hype
     class Player
     {
         private Texture2D texture;
-        private Vector2 location;
+        private Vector2 location = Vector2.Zero;
         private Vector2 speed = Vector2.Zero;
         private SpriteEffects flip = SpriteEffects.None;
 
@@ -38,20 +38,16 @@ namespace Hype
         }
         Level level;
 
-        public Player(Level level, Vector2 location, String playerIndex)
+        public Player(Level level, String playerIndex)
         {
             this.level = level;
-            this.location = location;
             texture = Level.Content.Load<Texture2D>("Player/" + playerIndex);
+            this.location = new Vector2(level.levelWidth - 160, level.levelHeight - 60 - texture.Height);
             dieSound = Level.Content.Load<SoundEffect>("Sounds/playerDeath");
             jumpSound = Level.Content.Load<SoundEffect>("Sounds/jump");
         }
-        public Player(Level level, String playerIndex)
-            : this(level, new Vector2(level.levelWidth - 160, level.levelHeight - 143), playerIndex)
-        {
-        }
         public Player(Level level)
-            : this(level, new Vector2(level.levelWidth - 160, level.levelHeight - 143), "1.1")
+            : this(level, "1.1")
         {
         }
 
@@ -124,20 +120,20 @@ namespace Hype
 
         public void ResetPosition()
         {
-            this.location = new Vector2(Level.levelWidth - 160, Level.levelHeight - 143);
-            this.dead = false;
+            location = new Vector2(Level.levelWidth - 160, Level.levelHeight - 60 - texture.Height);
+            speed = Vector2.Zero;
+            dead = false;
         }
 
         public void Update(GameTime gameTime, KeyboardState keyboardState, GamePadState gamePadState, GamePadState genericPadState)
         {
-            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             bool hasCollision = CheckCollision();
             if (hasCollision)
             {
                 DoJump();
             }
             ApplyPhysics();
-
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (keyboardState.IsKeyDown(Keys.Right) || Math.Round(gamePadState.ThumbSticks.Left.X, 1) > 0 ||
                 Math.Round(genericPadState.ThumbSticks.Left.X, 1) > 0)
             {
