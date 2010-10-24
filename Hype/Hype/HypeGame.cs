@@ -26,6 +26,11 @@ namespace Hype
         private Texture2D endOverlay;
         private Texture2D background;
 
+        //Splash screen
+        private Texture2D splash;
+        private float splashFade = 255.0f;
+        private float splashFadeSpeed = 200.0f;
+
         private Level level;
         private CharacterSelect charselect;
 
@@ -66,6 +71,7 @@ namespace Hype
 
             startOverlay = Content.Load<Texture2D>("Overlays/start");
             endOverlay = Content.Load<Texture2D>("Overlays/end");
+            splash = Content.Load<Texture2D>("Overlays/splash");
             background = Content.Load<Texture2D>("bg");
 
 
@@ -80,7 +86,11 @@ namespace Hype
         protected override void Update(GameTime gameTime)
         {
             inputManager.Update();
-
+            if (splashFade > 0f)
+            {
+                splashFade -= (float)gameTime.ElapsedGameTime.TotalSeconds * splashFadeSpeed;
+                splashFade = (float)Math.Floor(splashFade);
+            }
             GlobalInput(gameTime);
 
             if (!charselect.Selected)
@@ -150,21 +160,43 @@ namespace Hype
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             spriteBatch.Draw(background, Vector2.Zero, Color.LightYellow);
 
-            if (!charselect.Selected)
+            //Draw splash initially
+            if (splashFade > 0f)
             {
-                charselect.Draw(gameTime, spriteBatch, GraphicsDevice.Viewport.TitleSafeArea);
+                DrawSplash(gameTime);
             }
             else
             {
-                level.Draw(gameTime, spriteBatch);
+                //Draw selection screen if not selected
+                if (!charselect.Selected)
+                {
+                    charselect.Draw(gameTime, spriteBatch, GraphicsDevice.Viewport.TitleSafeArea);
+                }
+                else
+                {
+                    //Start drawing level and UI
+                    level.Draw(gameTime, spriteBatch);
 
-                DrawUI(gameTime);
+                    DrawUI(gameTime);
+                }
             }
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        private void DrawSplash(GameTime gameTime)
+        {
+            Rectangle screenArea = GraphicsDevice.Viewport.TitleSafeArea;
+            Vector2 position = new Vector2(screenArea.X, screenArea.Y);
+            Vector2 center = new Vector2(screenArea.X + screenArea.Width / 2.0f,
+                                         screenArea.Y + screenArea.Height / 2.0f);
+            Vector2 splashSize = new Vector2(splash.Width, splash.Height);
+            Vector2 splashPosition = center - splashSize / 2;
+
+            spriteBatch.Draw(splash, splashPosition, Color.White);
         }
 
         /// <summary>
@@ -185,8 +217,10 @@ namespace Hype
                 Vector2 overlaySize = new Vector2(endOverlay.Width, endOverlay.Height);
                 Vector2 overlayPosition = center - overlaySize / 2;
                 spriteBatch.Draw(endOverlay, overlayPosition, Color.White);
-                Vector2 scoreSize = bigUIFont.MeasureString(level.gameScore.ToString());
+
                 float scoreScale = (level.gameScore < 100000) ? 1f : 0.7f;
+                Vector2 scoreSize = bigUIFont.MeasureString(level.gameScore.ToString()) * scoreScale;
+
                 spriteBatch.DrawString(uiFont, "Your score is", center - uiFont.MeasureString("Your score is") / 2 - new Vector2(0, 180), Color.Black, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                 spriteBatch.DrawString(bigUIFont, level.gameScore.ToString(), center - scoreSize / 2, Color.White, 0f, Vector2.Zero, scoreScale, SpriteEffects.None, 0f);
                 spriteBatch.DrawString(uiFont, "Press Space(A)! ", overlayPosition + new Vector2(15, 340), Color.Black, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);

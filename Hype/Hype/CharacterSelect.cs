@@ -76,7 +76,6 @@ namespace Hype
                 (float)Math.Round(oldGamePadState.ThumbSticks.Left.Y, 1));
             Vector2 oldGenericPadAxis = new Vector2((float)Math.Round(oldGenericPadState.ThumbSticks.Left.X, 1),
                 (float)Math.Round(oldGenericPadState.ThumbSticks.Left.Y, 1));
-            Console.WriteLine(gamePadAxis.X);
 
             //Keypresses
             //Up

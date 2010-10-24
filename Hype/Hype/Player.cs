@@ -87,7 +87,7 @@ namespace Hype
 
         private void DoJump()
         {
-            jumpSound.Play(0.5f, 0f, 0f);
+            jumpSound.Play(0.3f, 0f, 0f);
             speed.Y = -5f * level.gameSpeed;
         }
 
@@ -113,7 +113,7 @@ namespace Hype
         {
             if (this.location.Y > Level.levelHeight + 50)
             {
-                dieSound.Play(0.5f, 0f, 0f);
+                dieSound.Play(0.3f, 1.0f, 0f);
                 dead = true;
             }
         }
