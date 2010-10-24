@@ -58,7 +58,7 @@ namespace Hype
         private void ApplyPhysics()
         {
             //Apply here gravity and air drag for X axis
-            speed.Y += 0.1f;
+            speed.Y += 0.1f * level.gameSpeed;
             speed.X = MathHelper.Clamp(speed.X, MaxXSpeed * -1, MaxXSpeed);
             if (speed.X > 0.1f)
             {

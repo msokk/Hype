@@ -92,7 +92,7 @@ namespace Hype
                 DisposePlatforms();
                 Player.Update(gameTime, keyboardState, gamePadState, genericPadState);
                 
-                gameSpeed += (float)gameTime.ElapsedGameTime.TotalSeconds*0.01f;
+                gameSpeed += (float)gameTime.ElapsedGameTime.TotalSeconds*0.05f;
                 scoreTime += gameTime.ElapsedGameTime;
             }
         }
@@ -146,6 +146,7 @@ namespace Hype
                 }
 
                 platformYSpacer = (float)r.Next(40, 70);
+                platformYSpacer += gameSpeed*50f;
             }
         }
 
