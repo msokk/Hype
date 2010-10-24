@@ -32,6 +32,12 @@ namespace Hype
         private const float minColors = 1f;
         private const float maxTypes = 7f;
         private const float minTypes = 1f;
+        private const float t = 0.5f;
+
+        //Keypress simulation
+        private KeyboardState oldKeyboardState;
+        private GamePadState oldGamePadState;
+        private GamePadState oldGenericPadState;
 
         public CharacterSelect(IServiceProvider serviceProvider)
         {
@@ -53,6 +59,7 @@ namespace Hype
 
         public void Update(GameTime gameTime, KeyboardState keyboardState, GamePadState gamePadState, GamePadState genericPadState, Level level)
         {
+
             if (keyboardState.IsKeyDown(Keys.Enter) || gamePadState.IsButtonDown(Buttons.Start)
                 || genericPadState.IsButtonDown(Buttons.A))
             {
@@ -60,27 +67,53 @@ namespace Hype
                 level.Start(getPlayerIndex());
             }
 
-            if (keyboardState.IsKeyDown(Keys.Up) || Math.Round(gamePadState.ThumbSticks.Left.Y, 1) < -0.5f ||
-                Math.Round(genericPadState.ThumbSticks.Left.Y, 1) < -0.5f)
+            //Normalized Thumbstick controls
+            Vector2 gamePadAxis = new Vector2((float)Math.Round(gamePadState.ThumbSticks.Left.X, 1),
+                (float)Math.Round(gamePadState.ThumbSticks.Left.Y, 1));
+            Vector2 genericPadAxis = new Vector2((float)Math.Round(genericPadState.ThumbSticks.Left.X, 1),
+                (float)Math.Round(genericPadState.ThumbSticks.Left.Y, 1));
+            Vector2 oldGamePadAxis = new Vector2((float)Math.Round(oldGamePadState.ThumbSticks.Left.X, 1),
+                (float)Math.Round(oldGamePadState.ThumbSticks.Left.Y, 1));
+            Vector2 oldGenericPadAxis = new Vector2((float)Math.Round(oldGenericPadState.ThumbSticks.Left.X, 1),
+                (float)Math.Round(oldGenericPadState.ThumbSticks.Left.Y, 1));
+            Console.WriteLine(gamePadAxis.X);
+
+            //Keypresses
+            //Up
+            if ((genericPadAxis.Y <= -t && oldGenericPadAxis.Y > -t)
+                || (gamePadAxis.Y <= -t && oldGamePadAxis.Y > -t) 
+                || (keyboardState.IsKeyDown(Keys.Up) && !oldKeyboardState.IsKeyDown(Keys.Up)))
             {
                 colorIndex = MathHelper.Clamp(--colorIndex, minColors, maxColors);
             }
-            else if (keyboardState.IsKeyDown(Keys.Down) || Math.Round(gamePadState.ThumbSticks.Left.Y, 1) > 0.5f ||
-              Math.Round(genericPadState.ThumbSticks.Left.Y, 1) > 0.5f)
+
+            //Down
+            if ((genericPadAxis.Y >= t && oldGenericPadAxis.Y < t)
+                || (gamePadAxis.Y >= t && oldGamePadAxis.Y < t)
+                || (keyboardState.IsKeyDown(Keys.Down) && !oldKeyboardState.IsKeyDown(Keys.Down)))
             {
                 colorIndex = MathHelper.Clamp(++colorIndex, minColors, maxColors);
             }
-            else if (keyboardState.IsKeyDown(Keys.Right) || Math.Round(gamePadState.ThumbSticks.Left.X, 1) > 0.5f ||
-              Math.Round(genericPadState.ThumbSticks.Left.X, 1) > 0.5f)
+
+            //Right
+            if ((genericPadAxis.X >= t && oldGenericPadAxis.X < t)
+                || (gamePadAxis.X >= t && oldGamePadAxis.X < t)
+                || (keyboardState.IsKeyDown(Keys.Right) && !oldKeyboardState.IsKeyDown(Keys.Right)))
             {
                 typeIndex = MathHelper.Clamp(++typeIndex, minTypes, maxTypes);
             }
-            else if (keyboardState.IsKeyDown(Keys.Left) || Math.Round(gamePadState.ThumbSticks.Left.X, 1) < -0.5f ||
-              Math.Round(genericPadState.ThumbSticks.Left.X, 1) < -0.5f)
+
+            //Left
+            if ((genericPadAxis.X <= -t && oldGenericPadAxis.X > -t)
+                || (gamePadAxis.X <= -t && oldGamePadAxis.X > -t)
+                || (keyboardState.IsKeyDown(Keys.Left) && !oldKeyboardState.IsKeyDown(Keys.Left)))
             {
                 typeIndex = MathHelper.Clamp(--typeIndex, minTypes, maxTypes);
             }
 
+            oldKeyboardState = keyboardState;
+            oldGamePadState = gamePadState;
+            oldGenericPadState = genericPadState;
         }
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Rectangle screenArea)
         {
@@ -108,8 +141,9 @@ namespace Hype
 
 
             playerTexture = content.Load<Texture2D>("Player/" + getPlayerIndex());
-            Vector2 playerTextureSize = new Vector2(playerTexture.Width, playerTexture.Height);
-            spriteBatch.Draw(playerTexture, center - playerTextureSize / 2, Color.White);
+            Vector2 playerLocation = new Vector2(center.X - (float)Math.Floor((double)playerTexture.Width / 2)
+                , center.Y - (float)Math.Floor((double)playerTexture.Height / 2));
+            spriteBatch.Draw(playerTexture, playerLocation, Color.White);
         }
     }
 }

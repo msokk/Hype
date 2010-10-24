@@ -63,7 +63,7 @@ namespace Hype
             if (speed.X > 0.1f)
             {
                 speed.X -= 0.1f;
-            }
+             }
             if (speed.X < -0.1f)
             {
                 speed.X += 0.1f;
