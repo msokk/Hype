@@ -80,19 +80,24 @@ namespace Hype
         }
 
         /// <summary>
-        /// Checks for global input and updates Level.
+        /// Checks for global input, hides splash screen, updates character selection and updates Level.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            //Get new state from Nuclex
             inputManager.Update();
+
+            //Fade out splash screen
             if (splashFade > 0f)
             {
                 splashFade -= (float)gameTime.ElapsedGameTime.TotalSeconds * splashFadeSpeed;
                 splashFade = (float)Math.Floor(splashFade);
             }
+
             GlobalInput(gameTime);
 
+            //Update character selection and then level
             if (!charselect.Selected)
             {
                 charselect.Update(gameTime, keyboardState, gamePadState, genericPadState, level);
@@ -187,6 +192,10 @@ namespace Hype
             base.Draw(gameTime);
         }
 
+        /// <summary>
+        /// Draw initial splash screen
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         private void DrawSplash(GameTime gameTime)
         {
             Rectangle screenArea = GraphicsDevice.Viewport.TitleSafeArea;
@@ -212,6 +221,7 @@ namespace Hype
             Vector2 center = new Vector2(screenArea.X + screenArea.Width / 2.0f,
                                          screenArea.Y + screenArea.Height / 2.0f);
 
+            //Show game over dialog
             if (!level.isGameRunning && level.Player.isDead)
             {
                 Vector2 overlaySize = new Vector2(endOverlay.Width, endOverlay.Height);
@@ -226,6 +236,7 @@ namespace Hype
                 spriteBatch.DrawString(uiFont, "Press Space(A)! ", overlayPosition + new Vector2(15, 340), Color.Black, 0.06f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             }
 
+            //Show game starting dialog
             if (!level.isGameRunning && !level.Player.isDead)
             {
                 Vector2 overlaySize = new Vector2(startOverlay.Width, startOverlay.Height);

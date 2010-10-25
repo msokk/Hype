@@ -31,6 +31,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <TargetCulture>et-EE</TargetCulture>
     <ProductName>Hype</ProductName>
+    <PublisherName>M.Sokk, M.Lensment, J.Lehtsalu, K.Sokk &amp; J.Sakkis</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>0.1.0.0</ApplicationVersion>

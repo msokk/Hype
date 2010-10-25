@@ -29,6 +29,12 @@ namespace Hype
         }
         Level level;
 
+        /// <summary>
+        /// Construct a platform
+        /// </summary>
+        /// <param name="level">Parent Level</param>
+        /// <param name="loc">Platform location</param>
+        /// <param name="type">Platform type</param>
         public Platform(Level level, Vector2 loc, int type)
         {
             this.level = level;
@@ -37,10 +43,15 @@ namespace Hype
             this.size = texture.Bounds;
         }
 
+        /// <summary>
+        /// Moves platform down according to gamespeed
+        /// </summary>
+        /// <param name="gameTime">Time</param>
         public void Update(GameTime gameTime)
         {
             location.Y += Level.gameSpeed;
         }
+
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, location, Color.White);

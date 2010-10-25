@@ -11,27 +11,36 @@ namespace Hype
 {
     class CharacterSelect
     {
+        //Textures
         private Texture2D playerTexture;
         private Texture2D overlayTexture;
         private Texture2D overlayUp;
         private Texture2D overlayDown;
         private Texture2D overlayRight;
         private Texture2D overlayLeft;
+
         private SpriteFont uiFont;
         private ContentManager content;
 
+        /// <summary>
+        /// Has character been chosen
+        /// </summary>
         public bool Selected
         {
             get { return characterselected; }
         }
         private bool characterselected = false;
 
+        //Character color and type index
         private float typeIndex = 1f;
         private float colorIndex = 1f;
+        //Color and type limits
         private const float maxColors = 4f;
         private const float minColors = 1f;
         private const float maxTypes = 7f;
         private const float minTypes = 1f;
+
+        //GamePad Axis trigger treshold
         private const float t = 0.5f;
 
         //Keypress simulation
@@ -39,6 +48,10 @@ namespace Hype
         private GamePadState oldGamePadState;
         private GamePadState oldGenericPadState;
 
+        /// <summary>
+        /// Constructs Character selection screen
+        /// </summary>
+        /// <param name="serviceProvider">Services used for loading</param>
         public CharacterSelect(IServiceProvider serviceProvider)
         {
             content = new ContentManager(serviceProvider, "Content");
@@ -51,12 +64,18 @@ namespace Hype
             playerTexture = content.Load<Texture2D>("Player/" + getPlayerIndex());
         }
 
+        /// <summary>
+        /// Get player index string
+        /// </summary>
+        /// <returns>String playerIndex</returns>
         public String getPlayerIndex()
         {
             return typeIndex + "." + colorIndex;
         }
 
-
+        /// <summary>
+        /// Updates selection screen with input
+        /// </summary>
         public void Update(GameTime gameTime, KeyboardState keyboardState, GamePadState gamePadState, GamePadState genericPadState, Level level)
         {
 
@@ -114,6 +133,13 @@ namespace Hype
             oldGamePadState = gamePadState;
             oldGenericPadState = genericPadState;
         }
+
+        /// <summary>
+        /// Draw selection screen to screen
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
+        /// <param name="screenArea">Screen size</param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Rectangle screenArea)
         {
             //Draw the overlay, buttons and character
