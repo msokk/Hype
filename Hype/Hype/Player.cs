@@ -38,6 +38,10 @@ namespace Hype
         }
         Level level;
 
+        /// <summary>
+        /// Construct new Player
+        /// </summary>
+        /// <param name="playerIndex">Character texture index</param>
         public Player(Level level, String playerIndex)
         {
             this.level = level;
@@ -51,6 +55,9 @@ namespace Hype
         {
         }
 
+        /// <summary>
+        /// Apply physics to player
+        /// </summary>
         private void ApplyPhysics()
         {
             //Apply here gravity and air drag for X axis
@@ -66,6 +73,9 @@ namespace Hype
             }
         }
 
+        /// <summary>
+        /// Checks if player collides with platforms
+        /// </summary>
         private bool CheckCollision()
         {
             if (speed.Y > 0 && location.Y + texture.Height > 0)
@@ -85,6 +95,9 @@ namespace Hype
             return false;
         }
 
+        /// <summary>
+        /// Player jumps
+        /// </summary>
         private void DoJump()
         {
             jumpSound.Play(0.3f, 0f, 0f);
@@ -118,6 +131,9 @@ namespace Hype
             }
         }
 
+        /// <summary>
+        /// Resets the player position to default
+        /// </summary>
         public void ResetPosition()
         {
             location = new Vector2(Level.levelWidth - 160, Level.levelHeight - 60 - texture.Height);
@@ -125,6 +141,9 @@ namespace Hype
             dead = false;
         }
 
+        /// <summary>
+        /// Checks for collisions, jumping, updates speed, location etc.
+        /// </summary>
         public void Update(GameTime gameTime, KeyboardState keyboardState, GamePadState gamePadState, GamePadState genericPadState)
         {
             bool hasCollision = CheckCollision();
@@ -145,13 +164,15 @@ namespace Hype
                 speed.X -= 1f + 1 * elapsed;
             }
 
-
-            location.Y += Level.gameSpeed;
+            location.Y += Level.gameSpeed + elapsed * speed.Y;
             location += speed;
             SideReEntry();
             CheckDeath();
         }
 
+        /// <summary>
+        /// Draw (and flip) the player
+        /// </summary
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (speed.X > 0)

@@ -60,6 +60,12 @@ namespace Hype
         }
         ContentManager content;
 
+        /// <summary>
+        /// Construct level
+        /// </summary>
+        /// <param name="serviceProvider">Used for content loading</param>
+        /// <param name="w">Game width</param>
+        /// <param name="h">Game height</param>
         public Level(IServiceProvider serviceProvider, int w, int h)
         {
             content = new ContentManager(serviceProvider, "Content");
@@ -71,6 +77,10 @@ namespace Hype
             platforms.AddFirst(new Platform(this, new Vector2(levelWidth - 200, levelHeight - 70), 0));
         }
 
+        /// <summary>
+        /// Construct new player
+        /// </summary>
+        /// <param name="playerIndex"></param>
         public void Start(String playerIndex)
         {
             player = new Player(this, playerIndex);
